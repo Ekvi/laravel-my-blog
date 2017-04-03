@@ -20,3 +20,8 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::resource('articles', 'ArticleController');
+
+Route::group(['prefix' => 'admin'], function () {
+    Route::resource('categories', 'CategoryController');
+});
+//Route::resource('admin/categories', 'admin\CategoryController');

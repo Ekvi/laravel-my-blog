@@ -8,7 +8,7 @@
                     <h2>Create new post</h2>
                 </div>
                 <div class="panel-body">
-                    <form method="post" action="/posts" class="clearfix">
+                    <form method="post" action="/articles" class="clearfix">
                         {{ csrf_field() }}
 
                         <div class="form-group">
