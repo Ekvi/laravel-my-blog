@@ -46,7 +46,10 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        &nbsp;<li><a href="{{ route('articles.index') }}">Articles</a></li>
+                        @if (!Auth::guest())
+                            &nbsp;<li><a href="{{ route('articles.create') }}">Add Article</a></li>
+                        @endif
+                        {{--&nbsp;<li><a href="{{ route('articles.index') }}">Articles</a></li>--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->

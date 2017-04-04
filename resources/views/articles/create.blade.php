@@ -17,7 +17,7 @@
 
                     {!! Form::close() !!}--}}
 
-                    <form method="post" action="/articles" class="clearfix">
+                    <form method="post" action="/articles" class="clearfix" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
                         <div class="form-group">
@@ -47,10 +47,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{--<div class="form-group">
+                        <div class="form-group">
                             <label for="image">Upload</label>
-                            <input type="file" id="image">
-                        </div>--}}
+                            <input type="file" id="image" name="image">
+                        </div>
                         <button type="submit" class="btn btn-primary pull-right">Submit</button>
                     </form>
                 </div>

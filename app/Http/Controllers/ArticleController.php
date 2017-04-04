@@ -47,11 +47,29 @@ class ArticleController extends Controller
             'description' => 'required',
             'content' => 'required',
             'category' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         //$request['user_id'] = Auth::user()->id;
         //Article::create($request->all());
 
+        $destination = '/images/articles';
+
+        if($request->hasFile('image')) {
+            echo 'here';
+            //$file = Input::file('image');
+            $image = $request->file('image');
+            /*echo "<pre>";
+            print_r($image);
+            echo "<pre>";*/
+            //$filename  = $image->getClientOriginalName();
+            $filename = time().'.'.$image->getClientOriginalExtension();
+            $image->move(public_path($destination), $filename);
+        } else {
+            echo 'else';
+        }
+
+        echo 'image ' . $filename;
         Article::create([
             'title' => $request->title,
             'url' => $request->url,
@@ -59,7 +77,10 @@ class ArticleController extends Controller
             'content' => $request['content'],
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
+            //'image' => 'image'
+            'image' => $filename ?? ''
         ]);
+
 
         return redirect('/articles');
     }
@@ -72,7 +93,9 @@ class ArticleController extends Controller
      */
     public function show($id)
     {
-        //
+        $article = Article::find($id);
+
+        return view('articles.show', compact('article'));
     }
 
     /**
