@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="row">
         <div class="col-md-6 col-md-offset-3">
             <div class="panel panel-primary">
@@ -8,6 +9,14 @@
                     <h2>Create new post</h2>
                 </div>
                 <div class="panel-body">
+
+                    {{--{!! Form::open(['url' => '/articles']) !!}
+                    echo Form::token();
+
+                    echo Form::label('title', 'Title', ['class' => 'form-control']);
+
+                    {!! Form::close() !!}--}}
+
                     <form method="post" action="/articles" class="clearfix">
                         {{ csrf_field() }}
 
@@ -29,7 +38,14 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <input type="text" class="form-control" name="category_id" id="category" placeholder="category id">
+                            {{--<input type="text" class="form-control" name="category_id" id="category" placeholder="category id">--}}
+                            {{--<pre>{{ print_r($categories) }}</pre>--}}
+                            <select id="category" name="category" class="form-control">
+                                <option selected disabled>Please select one option</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         {{--<div class="form-group">
                             <label for="image">Upload</label>

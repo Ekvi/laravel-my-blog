@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\Yaml\Tests\A;
 
 class ArticleController extends Controller
 {
@@ -16,7 +16,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all();
+        $articles = Article::all()->sortByDesc("created_at");;
 
         return view('articles.index', compact('articles'));
     }
@@ -28,7 +28,9 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        return view('articles.create');
+        $categories = Category::all();
+
+        return view('articles.create', compact('categories'));
     }
 
     /**
@@ -44,12 +46,22 @@ class ArticleController extends Controller
             'url' => 'required',
             'description' => 'required',
             'content' => 'required',
+            'category' => 'required',
         ]);
 
-        $request['user_id'] = Auth::user()->id;
+        //$request['user_id'] = Auth::user()->id;
+        //Article::create($request->all());
 
-        Article::create($request->all());
-        //return $request->all();
+        Article::create([
+            'title' => $request->title,
+            'url' => $request->url,
+            'description' => $request->description,
+            'content' => $request['content'],
+            'category_id' => $request->category,
+            'user_id' => Auth::user()->id,
+        ]);
+
+        return redirect('/articles');
     }
 
     /**
