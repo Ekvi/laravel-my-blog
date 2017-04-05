@@ -18,7 +18,8 @@
                                 </a>
                             </div>
                             <div class="pull-right">
-                                <form action="/articles/{{ $article->id }}">
+                                <form action="/articles/{{ $article->id }}" method="POST">
+                                    {{ csrf_field() }}
                                     {{method_field('DELETE')}}
                                     <button type="submit" role="button" class="btn btn-danger btn-sm">
                                         <i class="fa fa-times"></i>
@@ -38,7 +39,7 @@
                 <div>
                     {{ substr($article->content, 0, 400) . '...' }}
                 </div>
-                <a href="/articles/{{ $article->id }}">read more</a>
+                <a href="/articles/{{ $article->slug }}">read more</a>
                 <hr>
                 <div class="footer">
                     <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}

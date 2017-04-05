@@ -7,6 +7,7 @@ use App\Category;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redirect;
 
 class ArticleController extends Controller
 {
@@ -45,7 +46,7 @@ class ArticleController extends Controller
     {
         $this->validate($request, [
             'title' => 'required|max:255',
-            'url' => 'required',
+            //'slug' => 'required',
             'description' => 'required',
             'content' => 'required',
             'category' => 'required',
@@ -62,8 +63,9 @@ class ArticleController extends Controller
         }
 
         $article = new Article();
+
         $article->title = $request->title;
-        $article->url = $request->url;
+        $article->slug = $article->setSlug($request->title);
         $article->description = $request->description;
         $article->content = $request['content'];
         $article->category_id = $request->category;
@@ -73,15 +75,6 @@ class ArticleController extends Controller
         $article->save();
 
         $article->tags()->sync($request->tags, false);
-        /*Article::create([
-            'title' => $request->title,
-            'url' => $request->url,
-            'description' => $request->description,
-            'content' => $request['content'],
-            'category_id' => $request->category,
-            'user_id' => Auth::user()->id,
-            'image' => $filename ?? ''
-        ]);*/
 
         return redirect('/articles');
     }
@@ -92,9 +85,9 @@ class ArticleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        $article = Article::find($id);
+        $article = Article::where('slug', $slug)->first();
 
         return view('articles.show', compact('article'));
     }
@@ -130,6 +123,9 @@ class ArticleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $article = Article::findOrFail($id);
+        $article->delete();
+
+        return Redirect::route('articles.index');
     }
 }

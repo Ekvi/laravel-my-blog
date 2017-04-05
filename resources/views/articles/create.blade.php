@@ -28,10 +28,10 @@
                             <label for="title">Title</label>
                             <input type="text" class="form-control" name="title" id="title"  placeholder="title">
                         </div>
-                        <div class="form-group">
-                            <label for="url">Url</label>
-                            <input type="text" class="form-control" name="url" id="url" placeholder="url">
-                        </div>
+                        {{--<div class="form-group">
+                            <label for="slug">Slug</label>
+                            <input type="text" class="form-control" name="slug" id="slug" placeholder="slug">
+                        </div>--}}
                         <div class="form-group">
                             <label for="description">Description</label>
                             <input type="text" class="form-control" name="description" id="description" placeholder="description">
@@ -57,11 +57,6 @@
                                 @endforeach
                             </select>
                         </div>
-                        {{--<select class="js-example-basic-multiple" multiple="multiple">
-                            <option value="AL">Alabama</option>
-                            ...
-                            <option value="WY">Wyoming</option>
-                        </select>--}}
                         <div class="form-group">
                             <label for="image">Upload</label>
                             <input type="file" id="image" name="image">

@@ -3,10 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Article extends Model
 {
-    protected $fillable = ['title', 'url', 'description', 'content', 'category_id', 'user_id', 'image'];
+    protected $fillable = ['title', 'slug', 'description', 'content', 'category_id', 'user_id', 'image'];
 
     public function user()
     {
@@ -21,5 +22,14 @@ class Article extends Model
     public function tags()
     {
         return $this->belongsToMany('App\Tag');
+    }
+
+    public function setSlug($value)
+    {
+        $slug = Str::slug($value);
+
+        $count = self::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")->count();
+
+        return $count ? "{$slug}-{$count}" : $slug;
     }
 }
