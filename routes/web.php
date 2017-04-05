@@ -22,7 +22,7 @@ Route::get('/home', 'HomeController@index');
 
 Route::resource('articles', 'ArticleController');
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
     Route::resource('categories', 'CategoryController');
     Route::resource('tags', 'TagController');
 });
