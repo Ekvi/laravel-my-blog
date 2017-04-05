@@ -124,6 +124,13 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+
+        $path = public_path() . '/images/articles/' . $article->image;
+
+        if(file_exists($path)){
+            @unlink($path);
+        }
+
         $article->delete();
 
         return Redirect::route('articles.index');

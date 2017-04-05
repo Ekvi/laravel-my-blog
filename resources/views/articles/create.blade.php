@@ -24,23 +24,22 @@
                     <form method="post" action="/articles" class="clearfix" enctype="multipart/form-data">
                         {{ csrf_field() }}
 
-                        <div class="form-group">
+                        <div class="form-group {{$errors->has('title') ? 'has-error' : ''}}">
                             <label for="title">Title</label>
                             <input type="text" class="form-control" name="title" id="title"  placeholder="title">
                         </div>
-                        {{--<div class="form-group">
-                            <label for="slug">Slug</label>
-                            <input type="text" class="form-control" name="slug" id="slug" placeholder="slug">
-                        </div>--}}
-                        <div class="form-group">
+
+                        <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
                             <label for="description">Description</label>
                             <input type="text" class="form-control" name="description" id="description" placeholder="description">
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group {{$errors->has('content') ? 'has-error' : ''}}">
                             <label for="content">Content</label>
                             <textarea class="form-control" name="content" id="content" placeholder="content"></textarea>
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-group {{$errors->has('category') ? 'has-error' : ''}}">
                             <label for="category">Category</label>
                             <select id="category" name="category" class="form-control">
                                 <option selected disabled>Please select one option</option>
@@ -49,6 +48,7 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="tags">Tags</label>
                             <select id="tags" name="tags[]" class="form-control select2-multiple" multiple="multiple">
@@ -57,6 +57,7 @@
                                 @endforeach
                             </select>
                         </div>
+
                         <div class="form-group">
                             <label for="image">Upload</label>
                             <input type="file" id="image" name="image">
