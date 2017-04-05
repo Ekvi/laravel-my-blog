@@ -24,16 +24,23 @@
     </script>
 </head>
 <body>
-    <div id="app">
+<div id="app">
 
-        @include('includes.navbar')
+    @include('includes.navbar')
 
-        <div class="container">
-            @yield('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8">
+                @yield('content')
+            </div>
+            <div class="col-md-4">
+                @include('includes.sidebar')
+            </div>
         </div>
     </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
 </body>
 </html>
