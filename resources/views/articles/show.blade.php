@@ -2,21 +2,30 @@
 
 @section('content')
 
-    {{ $article->category['title'] }} / {{ $article->created_at->diffForHumans() }}
+    <div class="article">
+        {{ $article->category['title'] }} / {{ $article->created_at->diffForHumans() }}
 
-    @if (!empty($article->image))
-        <div class="image-header">
-            <img src="/images/articles/{{ $article->image }}" class="img-responsive">
+        @if (!empty($article->image))
+            <div class="image-header">
+                <img src="/images/articles/{{ $article->image }}" class="img-responsive">
+            </div>
+        @endif
+
+        <h2>{{ $article->title }}</h2>
+        <div>
+            {{ $article->content }}
         </div>
-    @endif
+        <hr>
 
-    <h2>{{ $article->title }}</h2>
-    <div>
-        {{ $article->content }}
+        <div class="footer">
+            <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
+
+            <i class="fa fa-tags" aria-hidden="true"></i>
+            @foreach($article->tags as $tag)
+                <span>{{ $tag->title}}</span>
+            @endforeach
+            <br><br>
+        </div>
     </div>
-    <hr>
-
-    <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
-    <i class="fa fa-tags" aria-hidden="true"></i> Tags
 
 @endsection

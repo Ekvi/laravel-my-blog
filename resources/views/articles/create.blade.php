@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('stylesheets')
+    <link href="{{ asset('css/select2.min.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="row">
@@ -38,8 +42,6 @@
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            {{--<input type="text" class="form-control" name="category_id" id="category" placeholder="category id">--}}
-                            {{--<pre>{{ print_r($categories) }}</pre>--}}
                             <select id="category" name="category" class="form-control">
                                 <option selected disabled>Please select one option</option>
                                 @foreach ($categories as $category)
@@ -47,6 +49,19 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="tags">Tags</label>
+                            <select id="tags" name="tags[]" class="form-control select2-multiple" multiple="multiple">
+                                @foreach ($tags as $tag)
+                                    <option value="{{ $tag->id }}">{{ $tag->title }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{--<select class="js-example-basic-multiple" multiple="multiple">
+                            <option value="AL">Alabama</option>
+                            ...
+                            <option value="WY">Wyoming</option>
+                        </select>--}}
                         <div class="form-group">
                             <label for="image">Upload</label>
                             <input type="file" id="image" name="image">
@@ -67,6 +82,14 @@
                 </div>
             </div>
         </div>
-
     </div>
 @endsection
+
+@section('scripts')
+    <script src="{{ asset('js/select2.min.js') }}"></script>
+
+    <script type="text/javascript">
+        $(".select2-multiple").select2();
+    </script>
+@endsection
+

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Category;
+use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,8 +30,9 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
+        $tags = Tag::all();
 
-        return view('articles.create', compact('categories'));
+        return view('articles.create', compact('categories', 'tags'));
     }
 
     /**
@@ -50,37 +52,36 @@ class ArticleController extends Controller
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        //$request['user_id'] = Auth::user()->id;
-        //Article::create($request->all());
-
         $destination = '/images/articles';
 
         if($request->hasFile('image')) {
-            echo 'here';
-            //$file = Input::file('image');
             $image = $request->file('image');
-            /*echo "<pre>";
-            print_r($image);
-            echo "<pre>";*/
-            //$filename  = $image->getClientOriginalName();
+
             $filename = time().'.'.$image->getClientOriginalExtension();
             $image->move(public_path($destination), $filename);
-        } else {
-            echo 'else';
         }
 
-        echo 'image ' . $filename;
-        Article::create([
+        $article = new Article();
+        $article->title = $request->title;
+        $article->url = $request->url;
+        $article->description = $request->description;
+        $article->content = $request['content'];
+        $article->category_id = $request->category;
+        $article->user_id = Auth::user()->id;
+        $article->image = $filename ?? '';
+
+        $article->save();
+
+        $article->tags()->sync($request->tags, false);
+        /*Article::create([
             'title' => $request->title,
             'url' => $request->url,
             'description' => $request->description,
             'content' => $request['content'],
             'category_id' => $request->category,
             'user_id' => Auth::user()->id,
-            //'image' => 'image'
             'image' => $filename ?? ''
-        ]);
-
+        ]);*/
 
         return redirect('/articles');
     }

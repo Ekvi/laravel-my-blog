@@ -3,6 +3,13 @@
     margin-bottom: 10px;
 }
 
+.article .footer span {
+    background-color: #2ab27b;
+    border-radius: 5px;
+    padding: 5px;
+    color: white;
+}
+
 .image-header img {
     min-width: 100%;
 }

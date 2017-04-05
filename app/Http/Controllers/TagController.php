@@ -89,7 +89,7 @@ class TagController extends Controller
 
         $tag->fill($request->all())->save();
 
-        Session::flash('flash_message', 'Tag successfully updated!');
+        Session::flash('success', 'Tag successfully updated!');
 
         return redirect()->route('tags.index');
     }

@@ -47,7 +47,7 @@ class CategoryController extends Controller
 
         Category::create($request->all());
 
-        Session::flash('flash_message', 'New category successfully added!');
+        Session::flash('success', 'New category successfully added!');
 
         return redirect()->route('categories.index');
     }
@@ -93,7 +93,7 @@ class CategoryController extends Controller
 
         $category->fill($request->all())->save();
 
-        Session::flash('flash_message', 'Category successfully updated!');
+        Session::flash('success', 'Category successfully updated!');
 
         return redirect()->route('categories.index');
     }
