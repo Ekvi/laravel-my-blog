@@ -2,8 +2,9 @@
 
 @section('content')
 
+    <div class="div">
     <div class="row">
-        <div class="col-md-6 col-md-offset-3">
+        <div class="col-md-8">
             @foreach($articles as $article)
             <div class="article">
                 {{ $article->category['title'] }} / {{ $article->created_at->diffForHumans() }}
@@ -18,11 +19,18 @@
                 </div>
                 <a href="/articles/{{ $article->id }}">read more</a>
                 <hr>
-                {{ $article->user->name }}
+                <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
+                <i class="fa fa-tags" aria-hidden="true"></i> Tags
                 <br><br>
             </div>
             @endforeach
         </div>
-    </div>
+        <div class="col-md-4">
+            <div>
+                {{ substr($articles[3]->content, 0, 400) . '...' }}
+            </div>
 
+        </div>
+    </div>
+    </div>
 @endsection

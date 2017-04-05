@@ -24,5 +24,7 @@ Route::resource('articles', 'ArticleController');
 
 Route::group(['prefix' => 'admin'], function () {
     Route::resource('categories', 'CategoryController');
+    Route::resource('tags', 'TagController');
 });
+
 //Route::resource('admin/categories', 'admin\CategoryController');

@@ -15,7 +15,8 @@
                 {{ $article->content }}
             </div>
             <hr>
-            {{ $article->user->name }}
+            <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
+            <i class="fa fa-tags" aria-hidden="true"></i> Tags
         </div>
     </div>
 
