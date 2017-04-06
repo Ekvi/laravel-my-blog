@@ -11,7 +11,7 @@
     <h3>Recent articles</h3>
     <div class="list-group">
         @foreach($recent_articles as $article)
-            <a href="{{ route('articles.show', $article->id) }}" class="list-group-item">{{ $article->title }}</a>
+            <a href="{{ route('articles.show', $article->slug) }}" class="list-group-item">{{ $article->title }}</a>
         @endforeach
     </div>
 </div>
