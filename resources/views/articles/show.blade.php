@@ -18,7 +18,7 @@
         <hr>
 
         <div class="footer">
-            <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
+            <i class="fa fa-user-o" aria-hidden="true"></i> {{ trans('article.posted_by') }} {{ $article->user->name }}
 
             <i class="fa fa-tags" aria-hidden="true"></i>
             @foreach($article->tags as $tag)

@@ -13,6 +13,12 @@ use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
+
+    public function __construct()
+    {
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,29 +29,6 @@ class ArticleController extends Controller
         $articles = Article::all()->sortByDesc("created_at");
 
         return view('articles.index', compact('articles'));
-
-        //$tags = Tag::all();
-        //$tags = Tag::find(1)->articles()->orderBy('title')->get();
-
-        /*$articles = Article::all();
-        foreach($articles as $article) {
-            echo "<pre>";
-            print_r($article->tagsCount);
-            echo "<pre>";
-        }*/
-   /*     $counts = Tag::join('article_tag', 'tags.id', '=', 'article_tag.tag_id')
-// group by tags.id in order to count number of rows in join and to get each tag only once
-            ->groupBy('tags.id')
-// get only columns from tags table along with aggregate COUNT column
-            ->select(['tags.title', DB::raw('COUNT(*) as count')])
-// order by count in descending order
-            ->orderBy('count', 'desc')
-            ->get();
-
-        echo "<pre>";
-        print_r($counts);
-        echo "<pre>";*/
-
     }
 
     /**

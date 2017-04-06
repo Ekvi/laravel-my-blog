@@ -20,7 +20,7 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @if (!Auth::guest())
-                    &nbsp;<li><a href="{{ route('articles.create') }}">Add Article</a></li>
+                    &nbsp;<li><a href="{{ route('articles.create') }}">{{ trans('main.add_article') }}</a></li>
                 @endif
                 {{--&nbsp;<li><a href="{{ route('articles.index') }}">Articles</a></li>--}}
             </ul>
@@ -29,8 +29,8 @@
             <ul class="nav navbar-nav navbar-right">
                 <!-- Authentication Links -->
                 @if (Auth::guest())
-                    <li><a href="{{ route('login') }}">Login</a></li>
-                    <li><a href="{{ route('register') }}">Register</a></li>
+                    <li><a href="{{ route('login') }}">{{ trans('main.login') }}</a></li>
+                    <li><a href="{{ route('register') }}">{{ trans('main.register') }}</a></li>
                 @else
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -42,7 +42,7 @@
                                 <a href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                    Logout
+                                    {{ trans('main.logout') }}
                                 </a>
 
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

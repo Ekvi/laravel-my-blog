@@ -1,6 +1,6 @@
 
 <div class="categories">
-    <h3>Categories</h3>
+    <h3>{{ trans('sidebar.categories') }}</h3>
     <div class="list-group">
         @foreach($categories as $category)
             <a href="" class="list-group-item">{{ $category->title }}</a>
@@ -9,7 +9,7 @@
 </div>
 
 <div class="recent-articles">
-    <h3>Recent articles</h3>
+    <h3>{{ trans('sidebar.recent_articles') }}</h3>
     <div class="list-group">
         @foreach($recent_articles as $article)
             <a href="{{ route('articles.show', $article->slug) }}" class="list-group-item">{{ $article->title }}</a>
@@ -18,7 +18,7 @@
 </div>
 
 <div class="tags">
-    <h3>Tags</h3>
+    <h3>{{ trans('sidebar.tags') }}</h3>
 
     <div id="jqcloud" class="jqcloud"></div>
 </div>

@@ -1,9 +1,5 @@
 @extends('layouts.sidebar')
 
-@section('stylesheets')
-    <link href="{{ asset('css/jqcloud.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 
     <div class="article">
@@ -43,10 +39,10 @@
                 <div>
                     {{ substr($article->content, 0, 400) . '...' }}
                 </div>
-                <a href="/articles/{{ $article->slug }}">read more</a>
+                <a href="/articles/{{ $article->slug }}">{{ trans('article.read_more') }}</a>
                 <hr>
                 <div class="footer">
-                    <i class="fa fa-user-o" aria-hidden="true"></i> Posted by {{ $article->user->name }}
+                    <i class="fa fa-user-o" aria-hidden="true"></i> {{ trans('article.posted_by') }} {{ $article->user->name }}
                     <i class="fa fa-tags" aria-hidden="true"></i>
                     @foreach($article->tags as $tag)
                         <span>{{ $tag->title}}</span>
