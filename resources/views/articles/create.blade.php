@@ -26,17 +26,17 @@
 
                         <div class="form-group {{$errors->has('title') ? 'has-error' : ''}}">
                             <label for="title">{{ trans('article.title') }}</label>
-                            <input type="text" class="form-control" name="title" id="title"  placeholder="{{ trans('article.title') }}">
+                            <input type="text" class="form-control" name="title" id="title"  placeholder="{{ trans('article.title') }}" value="{{ old('title') }}">
                         </div>
 
                         <div class="form-group {{$errors->has('description') ? 'has-error' : ''}}">
                             <label for="description">{{ trans('article.description') }}</label>
-                            <input type="text" class="form-control" name="description" id="description" placeholder="{{ trans('article.description') }}">
+                            <input type="text" class="form-control" name="description" id="description" placeholder="{{ trans('article.description') }}" value="{{ old('description') }}">
                         </div>
 
                         <div class="form-group {{$errors->has('content') ? 'has-error' : ''}}">
                             <label for="content">{{ trans('article.content') }}</label>
-                            <textarea class="form-control" name="content" id="content" placeholder="{{ trans('article.content') }}"></textarea>
+                            <textarea class="form-control" name="content" id="content" placeholder="{{ trans('article.content') }}">{{ old('title') }}</textarea>
                         </div>
 
                         <div class="form-group {{$errors->has('category') ? 'has-error' : ''}}">

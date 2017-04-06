@@ -38,10 +38,14 @@ class ArticleController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        $tags = Tag::all();
+        if (Auth::check()) {
+            $categories = Category::all();
+            $tags = Tag::all();
 
-        return view('articles.create', compact('categories', 'tags'));
+            return view('articles.create', compact('categories', 'tags'));
+        } else {
+            return redirect()->route('login');
+        }
     }
 
     /**
