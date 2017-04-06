@@ -1,5 +1,9 @@
 @extends('layouts.sidebar')
 
+@section('stylesheets')
+    <link href="{{ asset('css/jqcloud.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 
     <div class="article">

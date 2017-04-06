@@ -24,6 +24,13 @@ class Article extends Model
         return $this->belongsToMany('App\Tag');
     }
 
+    public function tagsCount()
+    {
+        return $this->belongsToMany('App\Tag')
+            ->selectRaw('count(tags.id) as aggregate')
+            ->groupBy('tag_id');
+    }
+
     public function setSlug($value)
     {
         $slug = Str::slug($value);
