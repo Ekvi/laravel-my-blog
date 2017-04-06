@@ -102,7 +102,10 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        return view('articles.edit', compact('article'));
+        $categories = Category::all();
+        $tags = Tag::all();
+
+        return view('articles.edit', compact('article', 'categories', 'tags'));
     }
 
     /**
@@ -114,7 +117,9 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        echo "<pre>";
+        print_r($request->all());
+        echo "<pre>";
     }
 
     /**
