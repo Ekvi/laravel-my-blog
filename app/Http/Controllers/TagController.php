@@ -43,7 +43,10 @@ class TagController extends Controller
             'title' => 'required|max:255',
         ]);
 
-        Tag::create($request->all());
+        Tag::create([
+            'title' => $request->title,
+            'slug' => Tag::setSlug($request->title)
+        ]);
 
         return redirect()->route('tags.index');
     }
@@ -87,7 +90,12 @@ class TagController extends Controller
 
         $tag = Tag::find($id);
 
-        $tag->fill($request->all())->save();
+        $tag->fill([
+            'title' => $request->title,
+            'slug' => Tag::setSlug($request->title)
+        ]);
+
+        $tag->save();
 
         Session::flash('success', 'Tag successfully updated!');
 

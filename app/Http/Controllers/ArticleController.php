@@ -13,19 +13,33 @@ use Illuminate\Support\Facades\Session;
 
 class ArticleController extends Controller
 {
-
-    public function __construct()
-    {
-
-    }
-
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(/*$tag_id = 0*/)
     {
+        /*if($tag_id == 0) {
+            echo 0;
+        } else {
+            $articles = DB::table('articles')
+                ->join('article_tag', 'articles.id', '=', 'article_tag.tag_id')
+                ->where('article_tag.tag_id', $tag_id)
+                ->sortByDesc("created_at")->get();
+
+            echo "<pre>";
+            print_r($articles);
+            echo "<pre>";
+        }*/
+        /*if($tag_id == 0) {
+            $articles = Article::all()->sortByDesc("created_at");
+        } else {
+            $articles = Article::whereHas('tags', function ($query) use($tag_id) {
+                $query->where('tags.id', $tag_id);
+            })->get();
+        }*/
+
         $articles = Article::all()->sortByDesc("created_at");
 
         return view('articles.index', compact('articles'));
@@ -178,5 +192,14 @@ class ArticleController extends Controller
         $article->delete();
 
         return Redirect::route('articles.index');
+    }
+
+    public function findByTag($slug)
+    {
+        $articles = Article::whereHas('tags', function ($query) use($slug) {
+            $query->where('tags.slug', $slug);
+        })->get();
+
+        return view('articles.index', compact('articles'));
     }
 }

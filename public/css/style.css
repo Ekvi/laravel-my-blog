@@ -7,7 +7,18 @@
     background-color: #2ab27b;
     border-radius: 5px;
     padding: 5px;
+}
+
+.article .footer span:hover {
+    background-color: #2cc27b;
+}
+
+.article .footer span a {
     color: white;
+}
+
+.article .footer span a:hover {
+    text-decoration: none;
 }
 
 .image-header img {

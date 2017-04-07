@@ -45,7 +45,7 @@
                     <i class="fa fa-user-o" aria-hidden="true"></i> {{ trans('article.posted_by') }} {{ $article->user->name }}
                     <i class="fa fa-tags" aria-hidden="true"></i>
                     @foreach($article->tags as $tag)
-                        <span>{{ $tag->title}}</span>
+                        <span><a href="/tags/{{ $tag->slug }}">{{ $tag->title}}</a></span>
                     @endforeach
                     <br><br>
                 </div>

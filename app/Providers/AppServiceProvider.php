@@ -33,7 +33,7 @@ class AppServiceProvider extends ServiceProvider
             // group by tags.id in order to count number of rows in join and to get each tag only once
             ->groupBy('tags.id')
             // get only columns from tags table along with aggregate COUNT column
-            ->select(['tags.title', DB::raw('COUNT(*) as count')])
+            ->select(['tags.title', 'tags.slug', DB::raw('COUNT(*) as count')])
             // order by count in descending order
             ->orderBy('count', 'desc')
             ->get();

@@ -22,7 +22,7 @@
 
             <i class="fa fa-tags" aria-hidden="true"></i>
             @foreach($article->tags as $tag)
-                <span>{{ $tag->title}}</span>
+                <span><a href="/tags/{{ $tag->slug }}">{{ $tag->title}}</a></span>
             @endforeach
             <br><br>
         </div>

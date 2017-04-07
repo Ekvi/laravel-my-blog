@@ -28,7 +28,6 @@
     <script src="{{ asset('js/jqcloud.min.js') }}"></script>
 
     <script type="text/javascript">
-        //var words = {{json_encode($tags)}};
         /*var words = [
             {text: "Lorem", weight: 13},
             {text: "Ipsum", weight: 10.5},
@@ -45,7 +44,11 @@
         var interval = 15 / words.length;
 
         for(var i = 0; i < words.length; i++) {
-            data.push({text: words[i]['title'], weight: 15 - (interval + i)});
+            data.push({
+                text: words[i]['title'],
+                weight: 15 - (interval + i),
+                link: '/tags/' + words[i]['slug']
+            });
         }
         $(document).ready(function($) {
             $('#jqcloud').jQCloud(data, {
