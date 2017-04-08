@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Category;
 use App\Tag;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+
 
 class ArticleController extends Controller
 {
@@ -18,29 +21,10 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(/*$tag_id = 0*/)
+    public function index()
     {
-        /*if($tag_id == 0) {
-            echo 0;
-        } else {
-            $articles = DB::table('articles')
-                ->join('article_tag', 'articles.id', '=', 'article_tag.tag_id')
-                ->where('article_tag.tag_id', $tag_id)
-                ->sortByDesc("created_at")->get();
-
-            echo "<pre>";
-            print_r($articles);
-            echo "<pre>";
-        }*/
-        /*if($tag_id == 0) {
-            $articles = Article::all()->sortByDesc("created_at");
-        } else {
-            $articles = Article::whereHas('tags', function ($query) use($tag_id) {
-                $query->where('tags.id', $tag_id);
-            })->get();
-        }*/
-
         $articles = Article::all()->sortByDesc("created_at");
+        //$articles = Article::paginate(10);
 
         return view('articles.index', compact('articles'));
     }
@@ -75,16 +59,15 @@ class ArticleController extends Controller
             'description' => 'required',
             'content' => 'required',
             'category' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'sometimes|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-
-        $destination = '/images/articles';
 
         if($request->hasFile('image')) {
             $image = $request->file('image');
 
-            $filename = time().'.'.$image->getClientOriginalExtension();
-            $image->move(public_path($destination), $filename);
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('/images/articles/' . $filename);
+            Image::make($image)->resize(800, 400)->save($location);
         }
 
         $article = new Article();
@@ -101,7 +84,9 @@ class ArticleController extends Controller
 
         $article->tags()->sync($request->tags, false);
 
-        return redirect('/articles');
+        Session::flash('success', 'Article successfully created!');
+
+        return redirect()->route('articles.index');;
     }
 
     /**
@@ -142,16 +127,12 @@ class ArticleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        /*echo "<pre>";
-        print_r($request->all());
-        echo "<pre>";*/
-
         $this->validate($request, [
             'title' => 'required|max:255',
             'description' => 'required',
             'content' => 'required',
             'category' => 'required',
-            //'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $article = Article::find($id);
@@ -161,8 +142,22 @@ class ArticleController extends Controller
         $article->description = $request->description;
         $article->content = $request['content'];
         $article->category_id = $request->category;
-        $article->user_id = Auth::user()->id;
-        //$article->image = $filename ?? '';
+
+        if($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '.' . $image->getClientOriginalExtension();
+            $location = public_path('/images/articles/' . $filename);
+
+            $oldImage = $article->image;
+
+            if(!empty($oldImage)) {
+                Storage::delete('articles/' . $oldImage);
+            }
+
+            Image::make($image)->resize(800, 400)->save($location);
+
+            $article->image = $filename;
+        }
 
         $article->save();
 
@@ -182,6 +177,7 @@ class ArticleController extends Controller
     public function destroy($id)
     {
         $article = Article::findOrFail($id);
+        $article->tags()->detach();
 
         $path = public_path() . '/images/articles/' . $article->image;
 

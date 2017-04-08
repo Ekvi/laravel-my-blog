@@ -34,15 +34,20 @@
                     @endif
                 </div>
 
-                @if (!empty($article->image))
+                {{--@if (!empty($article->image))
                     <div class="image-header">
                         <img src="/images/articles/{{ $article->image }}" class="img-responsive">
                     </div>
-                @endif
+                @endif--}}
 
                 <h2 class="text-center">{{ $article->title }}</h2>
 
                 <div class="content">
+                    @if (!empty($article->image))
+                        {{--<div class="image-header">--}}
+                            <img src="/images/articles/{{ $article->image }}" class="img-responsive pull-left image-header">
+                        {{--</div>--}}
+                    @endif
                     {{ substr($article->content, 0, 800) . '...' }}
                     <a href="/articles/{{ $article->slug }}">{{ trans('article.read_more') }}</a>
                 </div>
@@ -56,11 +61,15 @@
                             <span><a href="/tags/{{ $tag->slug }}">{{ $tag->title}}</a></span>
                         @endforeach
                     </div>
-
-                    {{--<br><br>--}}
                 </div>
             </div>
+
         @endforeach
+
+        {{--<div class="text-center">
+            {{ $articles->links() }}
+        </div>--}}
+
     </div>
 
 @endsection

@@ -2,7 +2,7 @@ body {
     font-size: 16px;
 }
 .article {
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     background-color: #FFFFFF;
     -webkit-box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
     -moz-box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
@@ -54,8 +54,13 @@ body {
     text-decoration: none;
 }
 
-.image-header img {
+/*.image-header img {
     min-width: 100%;
+}*/
+
+.image-header {
+    max-width: 360px;
+    margin-right: 10px;
 }
 
 .sidebar {
