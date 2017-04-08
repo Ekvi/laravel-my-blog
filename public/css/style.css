@@ -1,16 +1,49 @@
+body {
+    font-size: 16px;
+}
 .article {
-    border: 1px solid grey;
     margin-bottom: 10px;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
+    box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
 }
 
+.article h2 {
+    color: #009795;
+}
+
+.article a {
+    color: #009795;
+}
+
+.article .footer .info {
+    margin-bottom: 20px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .article .footer span {
-    background-color: #2ab27b;
+    background-color: #009795;
     border-radius: 5px;
     padding: 5px;
 }
 
 .article .footer span:hover {
-    background-color: #2cc27b;
+    background-color: #0B614B;
+}
+
+.article .header .title {
+    margin-left: 15px;
+    margin-top: 10px;
+}
+
+.article .header .settings {
+    margin-right: 10px;
+}
+
+.article .content {
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .article .footer span a {
@@ -23,4 +56,42 @@
 
 .image-header img {
     min-width: 100%;
+}
+
+.sidebar {
+    border: 1px solid #ffffff;
+    background-color: #FFFFFF;
+    -webkit-box-shadow: -4px 1px 9px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: -4px 1px 9px 0px rgba(0,0,0,0.5);
+    box-shadow: -4px 1px 9px 0px rgba(0,0,0,0.5);
+}
+
+.sidebar .categories,
+.sidebar .recent-articles,
+.sidebar .tags {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.sidebar .recent-articles,
+.sidebar .tags {
+    margin-top: 30px;
+}
+
+.recent-articles ul {
+    list-style-type: none;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.recent-articles ul li {
+    padding-top: 10px;
+}
+.recent-articles ul li a {
+    color: #009795;
+}
+
+.tags .jqcloud {
+    margin-left: -10px;
+    margin-top: -20px;
 }

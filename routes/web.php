@@ -24,6 +24,7 @@ Route::resource('articles', 'ArticleController');
 Route::get('/tags/{slug}', 'ArticleController@findByTag');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'isAdmin'], function () {
+    Route::get('/', 'Admin\ArticleController@index');
     Route::resource('categories', 'CategoryController');
     Route::resource('tags', 'TagController');
     Route::get('/articles', 'Admin\ArticleController@index');

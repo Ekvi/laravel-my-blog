@@ -1,27 +1,35 @@
 
-<div class="categories">
-    <h3>{{ trans('sidebar.categories') }}</h3>
-    <div class="list-group">
-        @foreach($categories as $category)
-            <a href="" class="list-group-item">{{ $category->title }}</a>
-        @endforeach
+<div class="sidebar">
+    <div class="categories">
+        <h3>{{ trans('sidebar.categories') }}</h3>
+        <div class="list-group">
+            @foreach($categories as $category)
+                <a href="" class="list-group-item">{{ $category->title }}</a>
+            @endforeach
+        </div>
+    </div>
+
+    <div class="recent-articles">
+        <h3>{{ trans('sidebar.recent_articles') }}</h3>
+        <ul>
+            @foreach($recent_articles as $article)
+                <li><a href="{{ route('articles.show', $article->slug) }}">{{ $article->title }}</a></li>
+            @endforeach
+        </ul>
+        {{--<div class="list-group">
+            @foreach($recent_articles as $article)
+                <a href="{{ route('articles.show', $article->slug) }}" class="list-group-item">{{ $article->title }}</a>
+            @endforeach
+        </div>--}}
+    </div>
+
+    <div class="tags">
+        <h3>{{ trans('sidebar.tags') }}</h3>
+
+        <div id="jqcloud" class="jqcloud"></div>
     </div>
 </div>
 
-<div class="recent-articles">
-    <h3>{{ trans('sidebar.recent_articles') }}</h3>
-    <div class="list-group">
-        @foreach($recent_articles as $article)
-            <a href="{{ route('articles.show', $article->slug) }}" class="list-group-item">{{ $article->title }}</a>
-        @endforeach
-    </div>
-</div>
-
-<div class="tags">
-    <h3>{{ trans('sidebar.tags') }}</h3>
-
-    <div id="jqcloud" class="jqcloud"></div>
-</div>
 
 
 @section('scripts')
@@ -52,8 +60,14 @@
         }
         $(document).ready(function($) {
             $('#jqcloud').jQCloud(data, {
+                classPattern: null,
+                colors: ["#04B486", "#009795", "#0B3B39", "#0A2A12", "#04B45F", "#A4A4A4", "#01DFA5", "#31B404", "#58FAAC"],
+                fontSize: {
+                    from: 0.1,
+                    to: 0.02
+                },
                 width: 350,
-                height: 280
+                height: 250
             });
         });
 
