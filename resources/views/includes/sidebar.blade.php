@@ -4,7 +4,7 @@
         <h4>{{ trans('sidebar.categories') }}</h4>
         <div class="list-group">
             @foreach($categories as $category)
-                <a href="" class="list-group-item">{{ $category->title }}</a>
+                <a href="/articles/category/{{ $category->id }}" class="list-group-item">{{ $category->title }}</a>
             @endforeach
         </div>
     </div>

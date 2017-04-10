@@ -198,4 +198,11 @@ class ArticleController extends Controller
 
         return view('articles.index', compact('articles'));
     }
+
+    public function findByCategory($categoryId)
+    {
+        $articles = Article::where('category_id', $categoryId)->get();
+
+        return view('articles.index', compact('articles'));
+    }
 }
