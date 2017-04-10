@@ -58,9 +58,9 @@
 
         @endforeach
 
-        {{--<div class="text-center">
+        <div class="text-center">
             {{ $articles->links() }}
-        </div>--}}
+        </div>
 
     </div>
 

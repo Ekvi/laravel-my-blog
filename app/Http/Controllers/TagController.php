@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\admin\ArticleController;
 use App\Tag;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -16,7 +17,7 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = Tag::all();
+        $tags = Tag::paginate(ArticleController::ADMIN_PAGE_LIMIT);
 
         return view('tags.index', compact('tags'));
     }

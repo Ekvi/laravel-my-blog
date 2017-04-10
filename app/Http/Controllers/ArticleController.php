@@ -16,6 +16,7 @@ use Intervention\Image\Facades\Image;
 
 class ArticleController extends Controller
 {
+    const ARTICLE_LIMIT = 10;
     /**
      * Display a listing of the resource.
      *
@@ -23,8 +24,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::all()->sortByDesc("created_at");
-        //$articles = Article::paginate(10);
+        $articles = Article::orderBy('created_at', 'desc')->paginate(self::ARTICLE_LIMIT);
 
         return view('articles.index', compact('articles'));
     }
@@ -194,14 +194,14 @@ class ArticleController extends Controller
     {
         $articles = Article::whereHas('tags', function ($query) use($slug) {
             $query->where('tags.slug', $slug);
-        })->get();
+        })->paginate(self::ARTICLE_LIMIT);
 
         return view('articles.index', compact('articles'));
     }
 
     public function findByCategory($categoryId)
     {
-        $articles = Article::where('category_id', $categoryId)->get();
+        $articles = Article::where('category_id', $categoryId)->paginate(self::ARTICLE_LIMIT);
 
         return view('articles.index', compact('articles'));
     }
