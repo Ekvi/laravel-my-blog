@@ -1,7 +1,8 @@
 body {
     font-size: 16px;
 }
-.article {
+.article,
+.show-article {
     margin-bottom: 20px;
     background-color: #FFFFFF;
     -webkit-box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
@@ -9,7 +10,8 @@ body {
     box-shadow: 3px 4px 9px 0px rgba(0,0,0,0.5);
 }
 
-.article h2 {
+.article h2,
+.show-article h2 {
     color: #009795;
 }
 
@@ -22,17 +24,27 @@ body {
     margin-left: 10px;
     margin-right: 10px;
 }
-.article .footer span {
+
+.show-article .footer .info {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-bottom: 20px;
+}
+
+.article .footer span,
+.show-article .footer span{
     background-color: #009795;
     border-radius: 5px;
     padding: 5px;
 }
 
-.article .footer span:hover {
+.article .footer span:hover,
+.show-article .footer span:hover {
     background-color: #0B614B;
 }
 
-.article .header .title {
+.article .header .title,
+.show-article .header .title{
     margin-left: 15px;
     margin-top: 10px;
 }
@@ -41,24 +53,29 @@ body {
     margin-right: 10px;
 }
 
-.article .content {
+.article .content,
+.show-article .content,
+.show-article .article-title {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.article .footer span a {
+.article .footer span a,
+.show-article .footer span a {
     color: white;
 }
 
-.article .footer span a:hover {
+.article .footer span a:hover,
+.show-article .footer span a:hover {
     text-decoration: none;
 }
 
-/*.image-header img {
-    min-width: 100%;
-}*/
 
-.image-header {
+.show-article .image-header img {
+    min-width: 100%;
+}
+
+.articles .image-header {
     max-width: 360px;
     margin-right: 10px;
 }
@@ -83,7 +100,21 @@ body {
     margin-top: 30px;
 }
 
-.recent-articles ul {
+.sidebar .categories h4,
+.sidebar .recent-articles h4,
+.sidebar .tags h4 {
+    color: #0d3625;
+    text-transform: uppercase;
+}
+
+.sidebar .sm-img {
+    max-width: 50px;
+    min-width: 50px;
+    max-height: 50px;
+    min-height: 50px;
+}
+
+/*.recent-articles ul {
     list-style-type: none;
     padding-left: 10px;
     padding-right: 10px;
@@ -92,8 +123,19 @@ body {
 .recent-articles ul li {
     padding-top: 10px;
 }
+
 .recent-articles ul li a {
     color: #009795;
+}*/
+
+.recent-articles .item {
+    margin-bottom: 10px;
+}
+
+.recent-articles a {
+    color: #009795;
+    font-size: 14px;
+    line-height: 0.9em;
 }
 
 .tags .jqcloud {

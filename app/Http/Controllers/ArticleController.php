@@ -86,7 +86,7 @@ class ArticleController extends Controller
 
         Session::flash('success', 'Article successfully created!');
 
-        return redirect()->route('articles.index');;
+        return redirect()->route('articles.index');
     }
 
     /**

@@ -1,7 +1,7 @@
 
 <div class="sidebar">
     <div class="categories">
-        <h3>{{ trans('sidebar.categories') }}</h3>
+        <h4>{{ trans('sidebar.categories') }}</h4>
         <div class="list-group">
             @foreach($categories as $category)
                 <a href="" class="list-group-item">{{ $category->title }}</a>
@@ -10,21 +10,41 @@
     </div>
 
     <div class="recent-articles">
-        <h3>{{ trans('sidebar.recent_articles') }}</h3>
-        <ul>
+        <h4>{{ trans('sidebar.recent_articles') }}</h4>
+        {{--<ul>
             @foreach($recent_articles as $article)
                 <li><a href="{{ route('articles.show', $article->slug) }}">{{ $article->title }}</a></li>
             @endforeach
-        </ul>
-        {{--<div class="list-group">
-            @foreach($recent_articles as $article)
-                <a href="{{ route('articles.show', $article->slug) }}" class="list-group-item">{{ $article->title }}</a>
-            @endforeach
-        </div>--}}
+        </ul>--}}
+        @foreach($recent_articles as $article)
+            <div class="clearfix item">
+                <div class="row">
+                    <div class="col-md-2">
+                        @if(!empty($article->image))
+                            <img src="/images/articles/{{ $article->image }}" class="sm-img">
+                        @endif
+                    </div>
+                    <div class="col-md-10">
+                        <a href="{{ route('articles.show', $article->slug) }}">
+                            {{ $article->title }}
+                        </a>
+                    </div>
+                </div>
+                {{--<div class="pull-left">
+                    <img src="/images/articles/{{ $article->image }}" class="sm-img">
+                </div>
+                <div class="pull-left">
+                    <a href="{{ route('articles.show', $article->slug) }}">
+                        {{ $article->title }}
+                    </a>
+                </div>--}}
+            </div>
+        @endforeach
+
     </div>
 
     <div class="tags">
-        <h3>{{ trans('sidebar.tags') }}</h3>
+        <h4>{{ trans('sidebar.tags') }}</h4>
 
         <div id="jqcloud" class="jqcloud"></div>
     </div>
